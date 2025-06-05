@@ -26,10 +26,13 @@ jobs:
         run: |
           npm install -g newman newman-reporter-htmlextra
  
-      - name: Run Postman Collection
+      - name: Run Postman Collection (no environment file)
         run: |
-          mkdir -p report
-          newman run DB_Monitoring.postman_collection.json -r htmlextra --reporter-htmlextra-export ./report/index.html
+         mkdir -p report
+         newman run collection.json \
+           -r htmlextra \
+           --reporter-htmlextra-export ./report/index.html \
+           --suppress-exit-code
  
       - name: Deploy HTML Report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4

@@ -28,7 +28,7 @@ jobs:
       - name: Run Postman Collection and generate report
         run: |
           mkdir -p report
-          newman run DB_monitoring.postman_collection.json \
+          newman run DB_Monitoring.postman_collection.json \
             -r htmlextra \
             --reporter-htmlextra-export ./report/index.html \
             --suppress-exit-code

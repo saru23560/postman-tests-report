@@ -1,0 +1,68 @@
+{
+	"info": {
+		"_postman_id": "65b9b67d-b09d-4450-a089-8287551044a2",
+		"name": "DB_Monitoring",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44979299"
+	},
+	"item": [
+		{
+			"name": "count",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Validate count values\", function () {\r",
+							"\r",
+							"    let response = pm.response.json(); // Get the response JSON\r",
+							"\r",
+							"    response.forEach(function (item) {\r",
+							"\r",
+							"        // Check if count is zero\r",
+							"\r",
+							"        if (item.count === 0) {\r",
+							"\r",
+							"            pm.test(`Count check FAILED for region: ${item.region}, env: ${item.evn}, vendor: ${item.vendor}`, function () {\r",
+							"\r",
+							"                pm.expect(item.count).to.not.equal(0); // This fails the test\r",
+							"\r",
+							"            });\r",
+							"\r",
+							"        } else {\r",
+							"\r",
+							"            pm.test(`Count check PASSED for region: ${item.region}, env: ${item.evn}, vendor: ${item.vendor}`, function () {\r",
+							"\r",
+							"pm.expect(item.count).to.be.greaterThan(0); // Passes the test\r",
+							"\r",
+							"            });\r",
+							"\r",
+							"       }\r",
+							"    });\r",
+							"});\r",
+							" "
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/USBillingInfo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"USBillingInfo"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

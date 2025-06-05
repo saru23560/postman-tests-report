@@ -31,5 +31,5 @@ jobs:
       - name: Deploy HTML Report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{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 }}
+          github_token:${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./report

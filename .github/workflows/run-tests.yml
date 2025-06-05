@@ -2,30 +2,30 @@ name: Run Postman Tests and Publish Report
  
 on:
   push:
-    branches: [ main ]
+    branches: [ main ]   # Change if your default branch is different
   workflow_dispatch:
  
 permissions:
-  contents: write  # Required to push to gh-pages
+  contents: write       # Required to push to gh-pages branch
  
 jobs:
-  run-tests:
+  test-and-deploy:
     runs-on: ubuntu-latest
  
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
  
-      - name: Set up Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
  
-      - name: Install Newman and HTML Extra Reporter
+      - name: Install Newman and HTML Reporter
         run: |
           npm install -g newman newman-reporter-htmlextra
  
-      - name: Run Postman Collection
+      - name: Run Postman Collection and generate report
         run: |
           mkdir -p report
           newman run DB_monitoring.postman_collection.json \
@@ -33,7 +33,7 @@ jobs:
             --reporter-htmlextra-export ./report/index.html \
             --suppress-exit-code
  
-      - name: Deploy HTML report to GitHub Pages
+      - name: Deploy report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}

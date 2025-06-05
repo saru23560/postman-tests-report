@@ -1,4 +1,4 @@
-name: Run Postman Tests and Deploy Report
+name: Postman Tests and Deploy Report
  
 on:
   push:

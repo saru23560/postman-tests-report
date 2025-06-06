@@ -1,0 +1,40 @@
+{
+	"info": {
+		"_postman_id": "3a3b01fc-63af-4e01-a8ce-90fee17bb622",
+		"name": "Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "44979299"
+	},
+	"item": [
+		{
+			"name": "EU_DEV Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"timestamp\",new Date().toISOString());\r",
+							"pm.test(\"Status code is 200\",function()\r",
+							"    {pm.response.to.have.status(200)}\r",
+							");\r",
+							"pm.test(\"Response contains status\",function(){\r",
+							"    pm.expect(pm.response.json()).to.have.property(\"status\");\r",
+							"});\r",
+							"pm.test(\"Check if status is UP\",function(){\r",
+							"    pm.expect(pm.response.json().status).to.eql(\"UP\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://billing.dev.evdata.euw1.hertz.io/actuator/health"
+			},
+			"response": []
+		}
+	]
+}
